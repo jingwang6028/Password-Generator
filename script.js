@@ -36,23 +36,25 @@ function generatePassword() {
     return;
   }
 
+  // confirm character type and make the user choose what he/she wants
   var speCharNeed = window.confirm('Click OK to confirm including special characters.');
   var numNeed = window.confirm('Click OK to confirm including numbers characters.');
   var lowerCaseNeed = window.confirm('Click OK to confirm including lowercase characters.');
   var upperCaseNeed = window.confirm('Click OK to confirm including uppercase characters.');
 
-  // check at least one type of character choose
+  // check at least one type of character be chosen
   if (!speCharNeed && !numNeed && !lowerCaseNeed && !upperCaseNeed) {
     window.alert('Please choose at least one type of character.');
     return;
   }
 
+  // how many types the user choose
   typesCount = speCharNeed + numNeed + lowerCaseNeed + upperCaseNeed;
   console.log(typesCount);
 
 
-  // set up an array which contains the type of user's choice as a nested array 
-  // set up an array contain one character of each type when the type is the user's choice
+  // set up an array which contains different types of characters the user confirm (each type as a nested array) 
+  // set up an array which contains random one character to confirm that at least one character will be shown in the final password for the type the user choose
   var randomSelector = [];
   var oneChar = [];
 
@@ -84,37 +86,37 @@ function generatePassword() {
     var indexUppre = Math.floor(Math.random()*upperCase.length);
     var upper1 = upperCase[indexUppre];
     console.log(upper1);
-
     randomSelector.push(upperCase)
     oneChar.push(upper1);
-    
   }
 
+  // make nested randomselector array be flat
   console.log(randomSelector);
   console.log(randomSelector.length);
   var flatRandom = randomSelector.flat();
   console.log(oneChar);
   console.log(flatRandom);
 
-  // After each type has one CharacterData, the number of the rest characters needed
+  // random select the rest of the characters needed based on the user input number 
   var extraCharNum = inputNum - oneChar.length
   var extraValue = [];
   for (var i=0; i<extraCharNum; i++) {
     
     var randomValue = flatRandom[Math.floor(Math.random()*flatRandom.length)];
     console.log(randomValue);
-    //for (var j=0; j<randomValue.length; j++) { 
     extraValue.push(randomValue);
-    //}
 
   }
 
   console.log(extraValue);
+
+  // combine one character value array and the rest characters array
   var finalValueArray = oneChar.concat(extraValue);
   console.log(finalValueArray);
+
+  // convert array to a string
   var finalPassword = finalValueArray.join('');
   console.log(finalPassword);
-
 
 
   return finalPassword;

@@ -23,7 +23,7 @@ function generatePassword() {
   //   Click OK to confirm including numbers characters. Click OK to confirm including lowercase characters. Click OK to confirm including uppercase characters. )
 
   //prompt window user input number
-  var inputNum = window.prompt('How many characters would you like your password to contain?');
+  var inputNum = window.prompt('How many characters would you like your password to contain? Choose between 8 and 128.');
   console.log(inputNum);
 
   // convert inputNum to a number datatype, and make it as integer
@@ -41,7 +41,7 @@ function generatePassword() {
   var lowerCaseNeed = window.confirm('Click OK to confirm including lowercase characters.');
   var upperCaseNeed = window.confirm('Click OK to confirm including uppercase characters.');
 
-  // check at least one character type choose
+  // check at least one type of character choose
   if (!speCharNeed && !numNeed && !lowerCaseNeed && !upperCaseNeed) {
     window.alert('Please choose at least one type of character.');
     return;
@@ -49,7 +49,6 @@ function generatePassword() {
 
   typesCount = speCharNeed + numNeed + lowerCaseNeed + upperCaseNeed;
   console.log(typesCount);
-
 
 
   // set up an array which contains the type of user's choice as a nested array 
@@ -71,7 +70,6 @@ function generatePassword() {
     randomSelector.push(number);
     oneChar.push(num1);
     console.log(num1);
-
   }
 
   if (lowerCaseNeed) {
@@ -91,6 +89,7 @@ function generatePassword() {
     oneChar.push(upper1);
     
   }
+
   console.log(randomSelector);
   console.log(randomSelector.length);
   var flatRandom = randomSelector.flat();
@@ -99,32 +98,26 @@ function generatePassword() {
 
   // After each type has one CharacterData, the number of the rest characters needed
   var extraCharNum = inputNum - oneChar.length
-
+  var extraValue = [];
   for (var i=0; i<extraCharNum; i++) {
-    var extraValue = [];
+    
     var randomValue = flatRandom[Math.floor(Math.random()*flatRandom.length)];
-    // for (var j=0; j<randomValue.length; j++) { 
+    console.log(randomValue);
+    //for (var j=0; j<randomValue.length; j++) { 
     extraValue.push(randomValue);
-    // }
-    
-    
-    console.log(extraValue);
-    
-  
+    //}
 
   }
 
-  var finalValue = oneChar.concat(extraValue);
-  console.log(finalValue);
-  
+  console.log(extraValue);
+  var finalValueArray = oneChar.concat(extraValue);
+  console.log(finalValueArray);
+  var finalPassword = finalValueArray.join('');
+  console.log(finalPassword);
 
 
 
-    
-    
-
-
-  return 'Generate password display here.'
+  return finalPassword;
 }
 
 // Write password to the #password input
